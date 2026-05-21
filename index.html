@@ -10,6 +10,7 @@
     --dark-blue: #03213B;
     --classic-green: #00C895;
     --bright-green: #ABFF88;
+    --sky-blue: #C2F7FF;
     --white: #FFFFFF;
     --cool-gray: #D6D6D6;
     --muted: #7a8a99;
@@ -21,9 +22,9 @@
   body {
     background: var(--deep-blue);
     color: var(--white);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+    font-family: 'Calibri', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
     min-height: 100vh;
-    padding: 40px 48px;
+    padding: 32px 48px;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -32,80 +33,57 @@
     margin: 0 auto;
   }
 
-  header {
-    margin-bottom: 32px;
-  }
-
-  .brand {
-    font-size: 11px;
-    color: var(--classic-green);
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
   h1 {
-    font-size: clamp(24px, 4vw, 36px);
+    font-size: clamp(22px, 3vw, 30px);
     font-weight: 300;
     color: var(--white);
     margin-bottom: 6px;
     line-height: 1.2;
   }
 
-  .subtitle {
-    color: var(--cool-gray);
-    font-size: 15px;
-    margin-bottom: 0;
-    line-height: 1.5;
-  }
 
-  .toolbar {
+  .header-row {
     display: flex;
-    gap: 10px;
+    align-items: baseline;
+    gap: 16px;
     margin-bottom: 24px;
     flex-wrap: wrap;
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--dark-blue);
-    border: 1px solid var(--border);
-    color: var(--cool-gray);
-    padding: 8px 14px;
-    border-radius: 5px;
+  .header-row h1 {
+    margin-bottom: 0;
+  }
+
+  .export-link {
     font-size: 13px;
+    color: var(--classic-green);
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-    text-decoration: none;
+    border: none;
+    background: none;
+    font-family: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
   }
 
-  .btn:hover {
-    border-color: var(--classic-green);
-    color: var(--white);
-  }
-
-  .btn svg {
-    width: 14px;
-    height: 14px;
-    fill: currentColor;
+  .export-link:hover {
+    color: var(--bright-green);
   }
 
   /* Input panel */
   .input-panel {
     background: var(--dark-blue);
-    border-left: 3px solid var(--classic-green);
+    border-top: 4px solid var(--classic-green);
     border-radius: 6px;
     padding: 24px;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
 
   .input-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 18px;
+    gap: 16px;
   }
 
   .input-field {
@@ -114,13 +92,15 @@
   }
 
   .input-label {
-    font-size: 11px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 10px;
     color: var(--classic-green);
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: bold;
     margin-bottom: 6px;
-    line-height: 1.4;
+    min-height: 28px;
+    line-height: 1.3;
   }
 
   .input-field input[type="number"] {
@@ -156,6 +136,7 @@
     padding: 10px 12px;
     cursor: pointer;
     gap: 8px;
+    height: 42px;
   }
 
   .checkbox-wrap input[type="checkbox"] {
@@ -167,70 +148,76 @@
   }
 
   .checkbox-wrap span {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--cool-gray);
     cursor: pointer;
     line-height: 1.3;
   }
 
   .helper {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
     margin-top: 4px;
+    font-style: italic;
   }
 
-  /* Cards */
+  /* Cards grid */
   .cards-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 14px;
+    margin-bottom: 20px;
   }
 
   .card {
     background: var(--dark-blue);
-    border-top: 3px solid var(--classic-green);
+    border-top: 4px solid var(--classic-green);
     border-radius: 6px;
-    padding: 22px 20px;
+    padding: 22px 18px;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.2s;
+    min-height: 480px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
   }
 
   .card:hover {
-    box-shadow: 0 4px 20px rgba(0, 200, 149, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,200,149,0.15);
   }
 
   .card.disabled {
-    opacity: 0.45;
+    opacity: 0.5;
   }
 
-  .icon-row {
-    margin-bottom: 16px;
+  .card.disabled:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
   }
 
   .icon-circle {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     background: var(--classic-green);
     border-radius: 50%;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 14px;
   }
 
   .icon-circle svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     fill: var(--dark-blue);
   }
 
   .stat {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 34px;
+    font-weight: bold;
     color: var(--bright-green);
     line-height: 1.1;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
 
   .card.disabled .stat {
@@ -238,85 +225,104 @@
   }
 
   .stat-label {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--cool-gray);
+    font-style: italic;
     margin-bottom: 12px;
   }
 
   .dollar {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--bright-green);
-    font-weight: 600;
-    margin-bottom: 14px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border);
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
   .card.disabled .dollar {
     color: var(--muted);
   }
 
-  .headline {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 8px;
-    line-height: 1.3;
+  .benefit {
+    font-size: 11px;
+    color: var(--sky-blue);
+    font-weight: bold;
+    margin-bottom: 12px;
+    line-height: 1.4;
   }
 
-  .body-text {
-    font-size: 13px;
+  .headline {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .contrast {
+    font-size: 9.5px;
+    line-height: 1.5;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+
+  .contrast .today-label {
+    font-weight: bold;
+    color: var(--classic-green);
+  }
+
+  .contrast .today-text {
     color: var(--cool-gray);
-    line-height: 1.55;
-    flex-grow: 1;
+  }
+
+  .contrast .sam-label {
+    font-weight: bold;
+    color: var(--bright-green);
+  }
+
+  .contrast .sam-text {
+    color: var(--white);
   }
 
   /* Footer */
   .footer-band {
     background: var(--dark-blue);
     border-radius: 6px;
-    padding: 20px 24px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 8px 24px;
+    padding: 18px 24px;
+    line-height: 1.5;
   }
 
   .footer-total {
     color: var(--bright-green);
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: 15px;
   }
 
   .footer-note {
-    color: var(--cool-gray);
+    color: var(--white);
+    font-style: italic;
     font-size: 12px;
-    line-height: 1.4;
+    margin-top: 4px;
+    display: block;
   }
 
-  /* Print / PDF styles */
+  /* Print / PDF */
   @media print {
     body {
       background: white;
       color: #1a1a1a;
-      padding: 20px;
+      padding: 16px;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
 
-    .toolbar { display: none; }
+    .export-link { display: none; }
 
-    .container { max-width: 100%; }
-
-    .brand { color: #00855f; }
-
-    h1 { color: #093B5F; font-size: 28px; }
-
-    .subtitle { color: #444; }
+    h1 { color: #093B5F; font-size: 24px; }
 
     .input-panel {
       background: #f5f7f9;
-      border-left-color: #00855f;
+      border-top-color: #00855f;
       page-break-inside: avoid;
     }
 
@@ -340,29 +346,28 @@
       background: #f5f7f9;
       border-top-color: #00855f;
       box-shadow: none;
+      transform: none !important;
       page-break-inside: avoid;
     }
 
-    .card:hover { box-shadow: none; }
-
     .stat { color: #00855f; }
-    .dollar { color: #00855f; border-bottom-color: #ddd; }
+    .dollar { color: #00855f; }
+    .benefit { color: #0077a3; }
     .headline { color: #1a1a1a; }
-    .body-text { color: #444; }
     .stat-label { color: #555; }
+    .contrast .today-label { color: #00855f; }
+    .contrast .today-text { color: #555; }
+    .contrast .sam-label { color: #00855f; }
+    .contrast .sam-text { color: #1a1a1a; }
+    .contrast { border-top-color: #ddd; }
 
-    .footer-band {
-      background: #f5f7f9;
-    }
-
+    .footer-band { background: #f5f7f9; }
     .footer-total { color: #00855f; }
     .footer-note { color: #444; }
-
-    .icon-circle {
-      background: #00855f;
-    }
+    .icon-circle { background: #00855f; }
   }
 
+  /* Responsive */
   @media (max-width: 1200px) {
     .cards-grid { grid-template-columns: repeat(3, 1fr); }
     .input-grid { grid-template-columns: repeat(3, 1fr); }
@@ -374,64 +379,48 @@
     .input-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 500px) {
     body { padding: 20px 16px; }
     .cards-grid { grid-template-columns: 1fr; }
     .input-grid { grid-template-columns: 1fr; }
     .input-panel { padding: 18px 16px; }
-    .card { padding: 18px 16px; }
+    .card { padding: 18px 16px; min-height: auto; }
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <header>
-    <div class="brand">Solace Agent Mesh</div>
-    <h1>ROI Calculator</h1>
-    <p class="subtitle">Adjust inputs below to model how Solace Agent Mesh value scales with your agent footprint, spend, and global reach.</p>
-  </header>
-
-  <div class="toolbar">
-    <button class="btn" onclick="window.print()" title="Export to PDF via browser print dialog">
-      <svg viewBox="0 0 24 24"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 14H8v-4h8v4zm2-4v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/></svg>
-      Export PDF
-    </button>
-    <button class="btn" onclick="copyLink()" title="Copy a shareable link to clipboard">
-      <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-      Copy Link
-    </button>
-    <button class="btn" id="resetBtn" onclick="resetDefaults()" title="Reset all inputs to default values">
-      <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-      Reset
-    </button>
+  <div class="header-row">
+    <h1>Solace Agent Mesh &mdash; ROI Calculator</h1>
+    <button class="export-link" onclick="window.print()">Export as PDF</button>
   </div>
 
   <div class="input-panel">
     <div class="input-grid">
       <div class="input-field">
-        <div class="input-label">Agents today</div>
+        <div class="input-label">Agents Today</div>
         <input type="number" id="currentAgents" value="5" min="0" inputmode="numeric">
       </div>
       <div class="input-field">
-        <div class="input-label">Agents in 12 months</div>
+        <div class="input-label">Agents in 12 Months</div>
         <input type="number" id="targetAgents" value="25" min="0" inputmode="numeric">
       </div>
       <div class="input-field">
-        <div class="input-label">Monthly token spend (USD)</div>
+        <div class="input-label">Monthly Token Spend (USD)</div>
         <input type="number" id="tokenSpend" value="50000" min="0" inputmode="numeric">
       </div>
       <div class="input-field">
-        <div class="input-label">Engineer monthly cost (USD)</div>
+        <div class="input-label">Engineer Monthly Cost (USD)</div>
         <input type="number" id="engineerCost" value="20000" min="0" inputmode="numeric">
-        <div class="helper">Fully-loaded cost (incl. benefits, overhead)</div>
+        <div class="helper">Fully-loaded EMEA/US rate</div>
       </div>
       <div class="input-field">
-        <div class="input-label">Regulated jurisdictions</div>
+        <div class="input-label">Regulated Jurisdictions</div>
         <input type="number" id="jurisdictions" value="4" min="1" inputmode="numeric">
         <div class="helper">e.g. US, UK, EU, APAC</div>
       </div>
       <div class="input-field">
-        <div class="input-label">Rate-limited systems</div>
+        <div class="input-label">Rate-Limited Systems</div>
         <label class="checkbox-wrap">
           <input type="checkbox" id="hasRateLimited" checked>
           <span>SFDC, SAP, HR, ERP</span>
@@ -441,80 +430,95 @@
   </div>
 
   <div class="cards-grid">
+    <!-- Card 1 -->
     <div class="card" id="card1">
-      <div class="icon-row">
-        <div class="icon-circle">
-          <svg viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.991.991 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88v9M12 4.15L5.04 8 12 11.85 18.96 8 12 4.15M5 15.91l6 3.38v-6.71L5 9.21v6.7m14 0v-6.7l-6 3.37v6.71l6-3.38z"/></svg>
-        </div>
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.991.991 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88v9M12 4.15L5.04 8 12 11.85 18.96 8 12 4.15M5 15.91l6 3.38v-6.71L5 9.21v6.7m14 0v-6.7l-6 3.37v6.71l6-3.38z"/></svg>
       </div>
       <div class="stat">40%</div>
       <div class="stat-label">less effort per new agent</div>
       <div class="dollar" id="dollar1">$0/yr saved</div>
-      <div class="headline">Reusable, composable agents</div>
-      <div class="body-text">Agents built for one use case plug into the next without rewriting. Catalogue once, reuse across teams. Compounds as agent count grows.</div>
+      <div class="benefit">Faster time to market. Engineers ship features, not plumbing.</div>
+      <div class="headline">Reusable, Composable Agents</div>
+      <div class="contrast">
+        <div><span class="today-label">Today:</span> <span class="today-text">Every agent rebuilt from scratch in LangChain.</span></div>
+        <div><span class="sam-label">With SAM:</span> <span class="sam-text">Legal agent built once, reused in reconciliation, research, origination.</span></div>
+      </div>
     </div>
 
+    <!-- Card 2 -->
     <div class="card" id="card2">
-      <div class="icon-row">
-        <div class="icon-circle">
-          <svg viewBox="0 0 24 24"><path d="M12 3C8.5 3 5.74 3.95 4.04 5.13C2.34 6.31 2 7.65 2 8s.34 1.69 2.04 2.87C5.74 12.05 8.5 13 12 13s6.26-.95 7.96-2.13C21.66 9.69 22 8.35 22 8s-.34-1.69-2.04-2.87C18.26 3.95 15.5 3 12 3M2 10.5V13c0 .35.34 1.69 2.04 2.87C5.74 17.05 8.5 18 12 18s6.26-.95 7.96-2.13C21.66 14.69 22 13.35 22 13v-2.5C19.96 11.79 16.43 13 12 13s-7.96-1.21-10-2.5M2 15.5V18c0 .35.34 1.69 2.04 2.87C5.74 22.05 8.5 23 12 23s6.26-.95 7.96-2.13C21.66 19.69 22 18.35 22 18v-2.5C19.96 16.79 16.43 18 12 18s-7.96-1.21-10-2.5z"/></svg>
-        </div>
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><path d="M12 3C8.5 3 5.74 3.95 4.04 5.13C2.34 6.31 2 7.65 2 8s.34 1.69 2.04 2.87C5.74 12.05 8.5 13 12 13s6.26-.95 7.96-2.13C21.66 9.69 22 8.35 22 8s-.34-1.69-2.04-2.87C18.26 3.95 15.5 3 12 3M2 10.5V13c0 .35.34 1.69 2.04 2.87C5.74 17.05 8.5 18 12 18s6.26-.95 7.96-2.13C21.66 14.69 22 13.35 22 13v-2.5C19.96 11.79 16.43 13 12 13s-7.96-1.21-10-2.5M2 15.5V18c0 .35.34 1.69 2.04 2.87C5.74 22.05 8.5 23 12 23s6.26-.95 7.96-2.13C21.66 19.69 22 18.35 22 18v-2.5C19.96 16.79 16.43 18 12 18s-7.96-1.21-10-2.5z"/></svg>
       </div>
       <div class="stat">20%+</div>
       <div class="stat-label">fewer tokens consumed</div>
       <div class="dollar" id="dollar2">$0/yr saved</div>
-      <div class="headline">Lower model spend at scale</div>
-      <div class="body-text">Shared documents and event-based coordination replace full-context passing between agents. Direct input into chargeback models.</div>
+      <div class="benefit">Lower run-rate. Predictable cost per use case.</div>
+      <div class="headline">Lower Model Spend at Scale</div>
+      <div class="contrast">
+        <div><span class="today-label">Today:</span> <span class="today-text">Full context passed agent-to-agent through LiteLLM.</span></div>
+        <div><span class="sam-label">With SAM:</span> <span class="sam-text">Shared documents and events cut token waste at the source.</span></div>
+      </div>
     </div>
 
+    <!-- Card 3 -->
     <div class="card" id="card3">
-      <div class="icon-row">
-        <div class="icon-circle">
-          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-        </div>
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
       </div>
       <div class="stat">Zero</div>
       <div class="stat-label">downstream system overloads</div>
       <div class="dollar" id="dollar3">$250K+ per outage avoided</div>
-      <div class="headline">Protect your systems of record</div>
-      <div class="body-text">Broker-level rate throttling and enforced output schemas stop agents from overwhelming Salesforce, SAP, HR, and ERP systems.</div>
+      <div class="benefit">Operational resilience. No SLA breaches, no incident bridges.</div>
+      <div class="headline">Protect Your Systems of Record</div>
+      <div class="contrast">
+        <div><span class="today-label">Today:</span> <span class="today-text">Agents call Salesforce, BambooHR directly. No governor.</span></div>
+        <div><span class="sam-label">With SAM:</span> <span class="sam-text">Broker-level throttling and enforced schemas protect every system.</span></div>
+      </div>
     </div>
 
+    <!-- Card 4 -->
     <div class="card" id="card4">
-      <div class="icon-row">
-        <div class="icon-circle">
-          <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
-        </div>
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
       </div>
       <div class="stat">3x</div>
       <div class="stat-label">pilot-to-prod success rate</div>
       <div class="dollar" id="dollar4">$0/yr saved</div>
-      <div class="headline">Catch failures before production</div>
-      <div class="body-text">Multi-agent evals go beyond single-agent testing. Per-agent telemetry on cost, latency, and grounding cuts the 88% pilot failure rate.</div>
+      <div class="benefit">Confidence to scale. Cut project risk and stuck pilots.</div>
+      <div class="headline">Catch Failures Before Production</div>
+      <div class="contrast">
+        <div><span class="today-label">Today:</span> <span class="today-text">LangSmith evaluates one agent at a time. Workflow gaps invisible.</span></div>
+        <div><span class="sam-label">With SAM:</span> <span class="sam-text">Multi-agent evals, telemetry per agent, escalation visibility.</span></div>
+      </div>
     </div>
 
+    <!-- Card 5 -->
     <div class="card" id="card5">
-      <div class="icon-row">
-        <div class="icon-circle">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-        </div>
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
       </div>
       <div class="stat">1 mesh</div>
       <div class="stat-label">across every jurisdiction</div>
       <div class="dollar" id="dollar5">$0 one-time avoidance</div>
-      <div class="headline">Built for global, regulated ops</div>
-      <div class="body-text">Hierarchical topics route by geography and tier. Regulated data stays in-region. RBAC enforced at the topic level, no stack duplication per region.</div>
+      <div class="benefit">Compliance by design. One platform team, not five.</div>
+      <div class="headline">Built for Global, Regulated Ops</div>
+      <div class="contrast">
+        <div><span class="today-label">Today:</span> <span class="today-text">Separate stacks per region. IAM and routing scattered.</span></div>
+        <div><span class="sam-label">With SAM:</span> <span class="sam-text">One topic taxonomy expresses geography, tier, entitlements.</span></div>
+      </div>
     </div>
   </div>
 
   <div class="footer-band">
-    <div class="footer-total" id="totalLine">Total annualized value: $0/yr recurring + $0 one-time</div>
-    <div class="footer-note">Figures are directional, based on industry benchmarks. Validate against actual run-rate and project plans.</div>
+    <div class="footer-total" id="totalLine">Total annualized value: $0/yr recurring + $0 one-time + $250K+ per outage avoided.</div>
+    <span class="footer-note">Figures are directional, based on industry benchmarks. Validate against actual run-rate and project plans.</span>
   </div>
 </div>
 
 <script>
-  const DEFAULTS = {
+  var DEFAULTS = {
     currentAgents: 5,
     targetAgents: 25,
     tokenSpend: 50000,
@@ -541,22 +545,21 @@
   }
 
   function recalculate() {
-    const v = getValues();
+    var v = getValues();
 
-    const newAgents = Math.max(0, v.targetAgents - v.currentAgents);
-    const card1Value = newAgents * 2 * v.engineerCost * 0.40;
-    const card2Value = v.tokenSpend * 12 * 0.20;
-    const card3Value = v.hasRateLimited ? 250000 : 0;
-    const card4Value = v.targetAgents * 0.30 * 2 * v.engineerCost;
-    const extraJurisdictions = Math.max(0, v.jurisdictions - 1);
-    const card5Value = extraJurisdictions * 6 * v.engineerCost;
+    var newAgents = Math.max(0, v.targetAgents - v.currentAgents);
+    var card1Value = newAgents * 2 * v.engineerCost * 0.40;
+    var card2Value = v.tokenSpend * 12 * 0.20;
+    var card4Value = v.targetAgents * 0.30 * 2 * v.engineerCost;
+    var extraJurisdictions = Math.max(0, v.jurisdictions - 1);
+    var card5Value = extraJurisdictions * 6 * v.engineerCost;
 
     document.getElementById('dollar1').textContent = formatMoney(card1Value) + '/yr saved';
     document.getElementById('dollar2').textContent = formatMoney(card2Value) + '/yr saved';
     document.getElementById('dollar4').textContent = formatMoney(card4Value) + '/yr saved';
     document.getElementById('dollar5').textContent = formatMoney(card5Value) + ' one-time avoidance';
 
-    const card3El = document.getElementById('card3');
+    var card3El = document.getElementById('card3');
     if (v.hasRateLimited) {
       card3El.classList.remove('disabled');
       document.getElementById('dollar3').textContent = '$250K+ per outage avoided';
@@ -565,19 +568,19 @@
       document.getElementById('dollar3').textContent = 'N/A';
     }
 
-    const recurring = card1Value + card2Value + card4Value;
-    const oneTime = card5Value;
-    const outage = v.hasRateLimited ? ' + $250K+ per outage avoided' : '';
+    var recurring = card1Value + card2Value + card4Value;
+    var oneTime = card5Value;
+    var outage = v.hasRateLimited ? ' + $250K+ per outage avoided' : '';
     document.getElementById('totalLine').textContent =
       'Total annualized value: ' + formatMoney(recurring) + '/yr recurring + ' +
-      formatMoney(oneTime) + ' one-time' + outage;
+      formatMoney(oneTime) + ' one-time' + outage + '.';
 
     updateURL();
   }
 
   function updateURL() {
-    const v = getValues();
-    const params = new URLSearchParams();
+    var v = getValues();
+    var params = new URLSearchParams();
     if (v.currentAgents !== DEFAULTS.currentAgents) params.set('ca', v.currentAgents);
     if (v.targetAgents !== DEFAULTS.targetAgents) params.set('ta', v.targetAgents);
     if (v.tokenSpend !== DEFAULTS.tokenSpend) params.set('ts', v.tokenSpend);
@@ -585,13 +588,13 @@
     if (v.jurisdictions !== DEFAULTS.jurisdictions) params.set('j', v.jurisdictions);
     if (!v.hasRateLimited) params.set('rl', '0');
 
-    const qs = params.toString();
-    const url = window.location.pathname + (qs ? '?' + qs : '');
+    var qs = params.toString();
+    var url = window.location.pathname + (qs ? '?' + qs : '');
     history.replaceState(null, '', url);
   }
 
   function loadFromURL() {
-    const params = new URLSearchParams(window.location.search);
+    var params = new URLSearchParams(window.location.search);
     if (params.has('ca')) document.getElementById('currentAgents').value = params.get('ca');
     if (params.has('ta')) document.getElementById('targetAgents').value = params.get('ta');
     if (params.has('ts')) document.getElementById('tokenSpend').value = params.get('ts');
@@ -611,7 +614,7 @@
   }
 
   function copyLink() {
-    const url = window.location.href;
+    var url = window.location.href;
     navigator.clipboard.writeText(url).then(function() {
       var btn = document.querySelector('[onclick="copyLink()"]');
       var orig = btn.innerHTML;
@@ -626,7 +629,6 @@
     });
   }
 
-  // Wire up
   ['currentAgents', 'targetAgents', 'tokenSpend', 'engineerCost', 'jurisdictions'].forEach(function(id) {
     document.getElementById(id).addEventListener('input', recalculate);
   });

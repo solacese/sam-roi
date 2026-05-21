@@ -71,6 +71,24 @@
     background: var(--bright-green);
   }
 
+  .learn-btn {
+    font-size: 12px;
+    color: var(--classic-green);
+    background: none;
+    border: 1px solid var(--classic-green);
+    padding: 8px 16px;
+    font-family: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .learn-btn:hover {
+    background: var(--classic-green);
+    color: var(--dark-blue);
+  }
+
   /* Input panel */
   .input-panel {
     background: var(--dark-blue);
@@ -274,22 +292,21 @@
   /* Footer */
   .footer-band {
     background: var(--dark-blue);
-    border-radius: 0;
-    padding: 18px 24px;
-    line-height: 1.5;
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-top: 8px;
   }
 
   .footer-total {
     color: var(--bright-green);
     font-weight: bold;
-    font-size: 15px;
+    font-size: 20px;
+    margin-bottom: 6px;
   }
 
   .footer-note {
-    color: var(--white);
-    font-style: italic;
+    color: var(--cool-gray);
     font-size: 12px;
-    margin-top: 4px;
     display: block;
   }
 
@@ -308,7 +325,7 @@
       print-color-adjust: exact;
     }
 
-    .export-btn { display: none; }
+    .export-btn, .learn-btn { display: none; }
 
     .header-row { margin-bottom: 10px; }
     h1 { color: #093B5F; font-size: 18px; }
@@ -416,6 +433,7 @@
   <div class="header-row">
     <h1>Solace Agent Mesh / ROI Calculator</h1>
     <button class="export-btn" onclick="window.print()">Export as PDF</button>
+    <a class="learn-btn" href="https://solace.com/agent-mesh-demo/" target="_blank" rel="noopener">Learn more</a>
   </div>
 
   <div class="input-panel">
@@ -567,13 +585,21 @@
     };
   }
 
+  // Diminishing returns: first 50 agents at full weight, beyond that sqrt scaling
+  function effectiveAgents(n) {
+    if (n <= 50) return n;
+    return 50 + Math.sqrt(n - 50) * 7;
+  }
+
   function recalculate() {
     var v = getValues();
 
     var newAgents = Math.max(0, v.targetAgents - v.currentAgents);
-    var card1Value = newAgents * 2 * v.engineerCost * 0.40;
+    var effNew = effectiveAgents(newAgents);
+    var card1Value = effNew * 2 * v.engineerCost * 0.40;
     var card2Value = v.tokenSpend * 12 * 0.20;
-    var card4Value = v.targetAgents * 0.30 * 2 * v.engineerCost;
+    var effTarget = effectiveAgents(v.targetAgents);
+    var card4Value = effTarget * 0.30 * 2 * v.engineerCost;
     var extraJurisdictions = Math.max(0, v.jurisdictions - 1);
     var card5Value = extraJurisdictions * 6 * v.engineerCost;
 

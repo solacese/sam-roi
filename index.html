@@ -158,6 +158,12 @@
 
   .preset-pill:hover:not(.active) { color: var(--white); }
 
+  .preset-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: 16px;
+  }
+
   /* Input panel */
   .input-panel {
     background: var(--dark-blue);
@@ -498,7 +504,7 @@
     }
 
     .export-btn, .copy-btn, .learn-btn, .reset-btn,
-    .preset-row, .advanced-section { display: none !important; }
+    .preset-row, .preset-desc, .advanced-section { display: none !important; }
 
     .print-header {
       display: block;
@@ -636,6 +642,7 @@
       <button class="preset-pill active" data-preset="base" onclick="applyPreset('base')">Base</button>
       <button class="preset-pill" data-preset="aggressive" onclick="applyPreset('aggressive')">Aggressive</button>
     </div>
+    <span class="preset-desc" id="presetDesc">Base: field-validated assumptions from early enterprise adopters (BBVA, BT). Start here.</span>
   </div>
 
   <div class="input-panel">
@@ -713,7 +720,7 @@
       <div class="benefit">Go live faster. Revenue impact weeks earlier.</div>
       <div class="headline">Time-to-First-Production-Agent</div>
       <div class="contrast">
-        <div><span class="today-label">Today:</span> <span class="today-text" id="today0">16 weeks to production with LangChain, custom orchestration.</span></div>
+        <div><span class="today-label">Today:</span> <span class="today-text" id="today0">16 weeks to production with LangGraph. Fast to demo, longer to harden for enterprise.</span></div>
         <div><span class="sam-label">With SAM:</span> <span class="sam-text">6 weeks. Pre-built connectors, governance, and observability out of the box.</span></div>
       </div>
     </div>
@@ -729,7 +736,7 @@
       <div class="benefit">Faster time to market. Engineers ship features, not plumbing.</div>
       <div class="headline">Reusable, Composable Agents</div>
       <div class="contrast">
-        <div><span class="today-label">Today:</span> <span class="today-text" id="today1">Every agent rebuilt from scratch in LangChain.</span></div>
+        <div><span class="today-label">Today:</span> <span class="today-text" id="today1">LangGraph agents share code but not runtime state. Reuse requires custom integration work.</span></div>
         <div><span class="sam-label">With SAM:</span> <span class="sam-text">Legal agent built once, reused in reconciliation, research, origination.</span></div>
       </div>
     </div>
@@ -745,8 +752,8 @@
       <div class="benefit">Lower run-rate. Predictable cost per use case.</div>
       <div class="headline">Lower Model Spend at Scale</div>
       <div class="contrast">
-        <div><span class="today-label">Today:</span> <span class="today-text" id="today2">Full context passed agent-to-agent through LiteLLM.</span></div>
-        <div><span class="sam-label">With SAM:</span> <span class="sam-text">Shared documents and events cut token waste at the source.</span></div>
+        <div><span class="today-label">Today:</span> <span class="today-text" id="today2">LangSmith charges per trace/run. Costs scale with invocation volume, not just agent count.</span></div>
+        <div><span class="sam-label">With SAM:</span> <span class="sam-text">Per-agent pricing, unlimited runs. Shared events cut token waste at the source.</span></div>
       </div>
     </div>
 
@@ -761,7 +768,7 @@
       <div class="benefit">Operational resilience. No SLA breaches, no incident bridges.</div>
       <div class="headline">Protect Your Systems of Record</div>
       <div class="contrast">
-        <div><span class="today-label">Today:</span> <span class="today-text" id="today3">Agents call Salesforce, BambooHR directly. No governor.</span></div>
+        <div><span class="today-label">Today:</span> <span class="today-text" id="today3">Agents call Salesforce, BambooHR directly. No platform-level governor.</span></div>
         <div><span class="sam-label">With SAM:</span> <span class="sam-text">Broker-level throttling and enforced schemas protect every system.</span></div>
       </div>
     </div>
@@ -777,7 +784,7 @@
       <div class="benefit">Confidence to scale. Cut project risk and stuck pilots.</div>
       <div class="headline">Avoided Sunk Pilot Cost</div>
       <div class="contrast">
-        <div><span class="today-label">Today:</span> <span class="today-text" id="today4">Pilots stall at demo. Months of engineering burned before pivot.</span></div>
+        <div><span class="today-label">Today:</span> <span class="today-text" id="today4">LangSmith evals cover single agents. Multi-agent production gaps surface late.</span></div>
         <div><span class="sam-label">With SAM:</span> <span class="sam-text">Multi-agent evals and telemetry surface blockers in weeks, not quarters.</span></div>
       </div>
     </div>
@@ -793,7 +800,7 @@
       <div class="benefit">Compliance by design. One platform team, not five.</div>
       <div class="headline">Built for Global, Regulated Ops</div>
       <div class="contrast">
-        <div><span class="today-label">Today:</span> <span class="today-text" id="today5">Separate stacks per region. IAM and routing scattered.</span></div>
+        <div><span class="today-label">Today:</span> <span class="today-text" id="today5">Separate stacks per region. IAM and routing managed outside the framework.</span></div>
         <div><span class="sam-label">With SAM:</span> <span class="sam-text">One topic taxonomy expresses geography, tier, entitlements.</span></div>
       </div>
     </div>
@@ -858,7 +865,7 @@
   };
 
   var STACK_TEXT = {
-    langchain: { today0: '16 weeks to production with LangChain, custom orchestration.', today1: 'Every agent rebuilt from scratch in LangChain.', today2: 'Full context passed agent-to-agent through LiteLLM.', today3: 'Agents call Salesforce, BambooHR directly. No governor.', today4: 'Pilots stall at demo. Months of engineering burned before pivot.', today5: 'Separate stacks per region. IAM and routing scattered.' },
+    langchain: { today0: '16 weeks to production with LangGraph. Fast to demo, longer to harden for enterprise.', today1: 'LangGraph agents share code but not runtime state. Reuse requires custom integration work.', today2: 'LangSmith charges per trace/run. Costs scale with invocation volume, not just agent count.', today3: 'Agents call Salesforce, BambooHR directly. No platform-level governor.', today4: 'LangSmith evals cover single agents. Multi-agent production gaps surface late.', today5: 'Separate stacks per region. IAM and routing managed outside the framework.' },
     openai: { today0: '16 weeks to production with OpenAI Agents SDK.', today1: 'Each agent is a standalone SDK call. No shared logic.', today2: 'Context stuffed into every assistant message via API.', today3: 'Agents hit APIs directly. No rate-limit layer.', today4: 'SDK demos look great. Production gaps surface late.', today5: 'Regional deployments duplicated per Azure region.' },
     bedrock: { today0: '16 weeks to production with Bedrock Agents, custom Step Functions.', today1: 'Each Bedrock Agent configured independently. Copy-paste across accounts.', today2: 'Bedrock passes full payloads between agents via Lambda.', today3: 'Lambda functions call SoR APIs directly. No throttle.', today4: 'Bedrock demos pass. Multi-agent coordination fails in prod.', today5: 'Separate AWS accounts per jurisdiction. Routing rebuilt each time.' },
     azure: { today0: '16 weeks to production with Azure AI Foundry pipelines.', today1: 'Each Foundry project is isolated. No component sharing.', today2: 'Prompt flows repeat context across chained nodes.', today3: 'Connectors go straight to Dynamics, SAP. No broker.', today4: 'Foundry pilots work in sandbox. Production infra missing.', today5: 'Regional Azure deployments managed separately.' },
@@ -1001,6 +1008,12 @@
     document.getElementById('today5').textContent = texts.today5;
   }
 
+  var PRESET_DESCS = {
+    conservative: 'Conservative: floor estimate. Minimal reuse, shorter pilots, smaller teams. Use if prospect is skeptical.',
+    base: 'Base: field-validated assumptions from early enterprise adopters (BBVA, BT). Start here.',
+    aggressive: 'Aggressive: full platform adoption. Larger teams, longer avoided pilots, higher outage costs. Use for upside framing.'
+  };
+
   function applyPreset(name) {
     currentPreset = name;
     var p = PRESETS[name];
@@ -1017,6 +1030,8 @@
     document.querySelectorAll('.preset-pill').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.preset === name);
     });
+
+    document.getElementById('presetDesc').textContent = PRESET_DESCS[name] || '';
 
     recalculate();
   }

@@ -7,32 +7,27 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2300C895'/></svg>">
 <style>
   :root {
-    --deep-blue: #093B5F;
-    --dark-blue: #03213B;
-    --classic-green: #00C895;
-    --bright-green: #ABFF88;
-    --sky-blue: #C2F7FF;
-    --white: #FFFFFF;
-    --cool-gray: #D6D6D6;
-    --muted: #7a8a99;
+    --bg: #093B5F;
+    --panel: #03213B;
+    --accent: #00C895;
+    --text: #FFFFFF;
+    --dim: #9aacba;
     --border: #1a4a6e;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: var(--deep-blue);
-    color: var(--white);
-    font-family: 'Calibri', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
     min-height: 100vh;
     padding: 48px 56px;
     -webkit-font-smoothing: antialiased;
   }
 
-  .container {
-    max-width: 100%;
-    margin: 0 auto;
-  }
+  .container { max-width: 100%; margin: 0 auto; }
 
   /* Header */
   .header-row {
@@ -44,76 +39,55 @@
   }
 
   h1 {
-    font-size: 28px;
-    font-weight: 300;
-    color: var(--white);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text);
     line-height: 1.2;
     margin-right: auto;
   }
 
-  .export-btn {
+  .btn {
     font-size: 13px;
-    color: var(--dark-blue);
-    background: var(--classic-green);
-    cursor: pointer;
-    border: none;
     font-family: inherit;
     font-weight: 600;
-    padding: 10px 20px;
-    letter-spacing: 0.3px;
-    transition: background 0.2s;
-  }
-
-  .export-btn:hover { background: var(--bright-green); }
-
-  .copy-btn {
-    font-size: 13px;
-    color: var(--classic-green);
-    background: none;
-    border: 1px solid var(--classic-green);
-    padding: 10px 20px;
-    font-family: inherit;
-    font-weight: 600;
+    padding: 9px 18px;
+    border: 1px solid var(--accent);
     cursor: pointer;
-    letter-spacing: 0.3px;
     transition: background 0.2s, color 0.2s;
-  }
-
-  .copy-btn:hover {
-    background: var(--classic-green);
-    color: var(--dark-blue);
-  }
-
-  .learn-btn {
-    font-size: 13px;
-    color: var(--classic-green);
-    background: none;
-    border: 1px solid var(--classic-green);
-    padding: 10px 20px;
-    font-family: inherit;
-    font-weight: 600;
     text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.2px;
   }
 
-  .learn-btn:hover {
-    background: var(--classic-green);
-    color: var(--dark-blue);
+  .btn-primary {
+    background: var(--accent);
+    color: var(--panel);
+    border-color: var(--accent);
+  }
+
+  .btn-primary:hover { background: #33d4ab; }
+
+  .btn-secondary {
+    background: none;
+    color: var(--accent);
+  }
+
+  .btn-secondary:hover {
+    background: var(--accent);
+    color: var(--panel);
   }
 
   .reset-btn {
     font-size: 12px;
-    color: var(--muted);
+    color: var(--dim);
     background: none;
     border: none;
     cursor: pointer;
     font-family: inherit;
     text-decoration: underline;
-    padding: 10px 8px;
+    padding: 9px 8px;
   }
 
-  .reset-btn:hover { color: var(--white); }
+  .reset-btn:hover { color: var(--text); }
 
   /* Preset toggle */
   .preset-row {
@@ -124,11 +98,11 @@
   }
 
   .preset-label {
-    font-family: 'Consolas', 'Monaco', monospace;
     font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 1px;
+    color: var(--dim);
+    letter-spacing: 0.5px;
     text-transform: uppercase;
+    font-weight: 600;
     margin-right: 12px;
   }
 
@@ -143,8 +117,8 @@
     font-weight: 600;
     padding: 8px 20px;
     border: none;
-    background: var(--dark-blue);
-    color: var(--muted);
+    background: var(--panel);
+    color: var(--dim);
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
   }
@@ -152,21 +126,15 @@
   .preset-pill + .preset-pill { border-left: 1px solid var(--border); }
 
   .preset-pill.active {
-    background: var(--classic-green);
-    color: var(--dark-blue);
+    background: var(--accent);
+    color: var(--panel);
   }
 
-  .preset-pill:hover:not(.active) { color: var(--white); }
-
-  .preset-desc {
-    font-size: 12px;
-    color: var(--muted);
-    margin-left: 16px;
-  }
+  .preset-pill:hover:not(.active) { color: var(--text); }
 
   /* Input panel */
   .input-panel {
-    background: var(--dark-blue);
+    background: var(--panel);
     border: 1px solid var(--border);
     padding: 28px 32px;
     margin-bottom: 24px;
@@ -179,18 +147,14 @@
     align-items: start;
   }
 
-  .input-field {
-    display: flex;
-    flex-direction: column;
-  }
+  .input-field { display: flex; flex-direction: column; }
 
   .input-label {
-    font-family: 'Consolas', 'Monaco', monospace;
     font-size: 11px;
-    color: var(--classic-green);
-    letter-spacing: 1.5px;
+    color: var(--accent);
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 8px;
     min-height: 32px;
     line-height: 1.4;
@@ -200,12 +164,12 @@
 
   .input-field input[type="number"],
   .input-field select {
-    background: var(--deep-blue);
+    background: var(--bg);
     border: 1px solid var(--border);
-    color: var(--white);
-    padding: 12px 14px;
+    color: var(--text);
+    padding: 11px 14px;
     border-radius: 0;
-    font-size: 16px;
+    font-size: 15px;
     font-family: inherit;
     width: 100%;
     transition: border-color 0.2s;
@@ -231,47 +195,19 @@
   .input-field input[type="number"]:focus,
   .input-field select:focus {
     outline: none;
-    border-color: var(--classic-green);
-  }
-
-  .input-with-region {
-    display: flex;
-    gap: 6px;
-  }
-
-  .input-with-region input { flex: 1; }
-
-  .region-select {
-    background: var(--deep-blue);
-    border: 1px solid var(--border);
-    color: var(--classic-green);
-    padding: 8px 6px;
-    font-size: 11px;
-    font-family: 'Consolas', monospace;
-    border-radius: 0;
-    cursor: pointer;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    min-width: 56px;
-    text-align: center;
-  }
-
-  .region-select:focus {
-    outline: none;
-    border-color: var(--classic-green);
+    border-color: var(--accent);
   }
 
   .helper {
     font-size: 11px;
-    color: var(--muted);
+    color: var(--dim);
     margin-top: 6px;
   }
 
   /* Total value banner */
   .total-banner {
-    background: var(--dark-blue);
-    border: 2px solid var(--classic-green);
+    background: var(--panel);
+    border: 2px solid var(--accent);
     padding: 24px 32px;
     margin-bottom: 24px;
     display: flex;
@@ -281,9 +217,9 @@
   }
 
   .total-main {
-    font-size: 28px;
-    font-weight: bold;
-    color: var(--bright-green);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
   }
 
   .total-details {
@@ -294,12 +230,10 @@
 
   .total-item {
     font-size: 14px;
-    color: var(--cool-gray);
+    color: var(--dim);
   }
 
-  .total-item strong {
-    color: var(--classic-green);
-  }
+  .total-item strong { color: var(--text); }
 
   /* Cards grid */
   .cards-grid {
@@ -310,7 +244,7 @@
   }
 
   .card {
-    background: var(--dark-blue);
+    background: var(--panel);
     border: 1px solid var(--border);
     padding: 28px 24px;
     display: flex;
@@ -318,63 +252,61 @@
   }
 
   .icon-circle {
-    width: 40px;
-    height: 40px;
-    background: var(--classic-green);
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
 
   .icon-circle svg {
-    width: 20px;
-    height: 20px;
-    fill: var(--dark-blue);
+    width: 18px;
+    height: 18px;
+    fill: var(--panel);
   }
 
   .stat {
-    font-size: 36px;
-    font-weight: bold;
-    color: var(--bright-green);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
     line-height: 1.1;
     margin-bottom: 4px;
   }
 
   .stat-label {
     font-size: 13px;
-    color: var(--cool-gray);
-    margin-bottom: 16px;
+    color: var(--dim);
+    margin-bottom: 14px;
   }
 
   .dollar {
-    font-size: 15px;
-    color: var(--bright-green);
-    font-weight: bold;
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 600;
     margin-bottom: 6px;
   }
 
   .formula {
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 11px;
-    color: var(--muted);
+    font-size: 12px;
+    color: var(--dim);
     margin-bottom: 14px;
     line-height: 1.4;
   }
 
   .benefit {
     font-size: 13px;
-    color: var(--sky-blue);
-    font-weight: 600;
-    margin-bottom: 16px;
+    color: var(--dim);
+    margin-bottom: 14px;
     line-height: 1.5;
   }
 
   .headline {
     font-size: 15px;
-    font-weight: bold;
-    color: var(--white);
+    font-weight: 600;
+    color: var(--text);
     margin-bottom: 0;
     line-height: 1.3;
   }
@@ -388,20 +320,18 @@
   }
 
   .contrast div + div { margin-top: 4px; }
-  .contrast .today-label { font-weight: bold; color: var(--classic-green); }
-  .contrast .today-text { color: var(--cool-gray); }
-  .contrast .sam-label { font-weight: bold; color: var(--bright-green); }
-  .contrast .sam-text { color: var(--white); }
+  .contrast .today-label { font-weight: 600; color: var(--accent); }
+  .contrast .today-text { color: var(--dim); }
+  .contrast .sam-label { font-weight: 600; color: var(--text); }
+  .contrast .sam-text { color: var(--text); }
 
   /* Advanced section */
-  .advanced-section {
-    margin-bottom: 24px;
-  }
+  .advanced-section { margin-bottom: 24px; }
 
   .advanced-toggle {
     font-size: 13px;
     font-family: inherit;
-    color: var(--muted);
+    color: var(--dim);
     background: none;
     border: none;
     cursor: pointer;
@@ -411,7 +341,7 @@
     gap: 6px;
   }
 
-  .advanced-toggle:hover { color: var(--white); }
+  .advanced-toggle:hover { color: var(--text); }
 
   .advanced-toggle .arrow {
     display: inline-block;
@@ -423,7 +353,7 @@
 
   .advanced-panel {
     display: none;
-    background: var(--dark-blue);
+    background: var(--panel);
     border: 1px solid var(--border);
     padding: 24px 28px;
     margin-top: 12px;
@@ -437,21 +367,18 @@
     gap: 20px;
   }
 
-  .advanced-field {
-    display: flex;
-    flex-direction: column;
-  }
+  .advanced-field { display: flex; flex-direction: column; }
 
   .advanced-field label {
     font-size: 12px;
-    color: var(--cool-gray);
+    color: var(--dim);
     margin-bottom: 6px;
   }
 
   .advanced-field input {
-    background: var(--deep-blue);
+    background: var(--bg);
     border: 1px solid var(--border);
-    color: var(--white);
+    color: var(--text);
     padding: 8px 12px;
     border-radius: 0;
     font-size: 14px;
@@ -468,18 +395,18 @@
 
   .advanced-field input:focus {
     outline: none;
-    border-color: var(--classic-green);
+    border-color: var(--accent);
   }
 
   /* Footer */
   .footer-band {
-    background: var(--dark-blue);
+    background: var(--panel);
     border: 1px solid var(--border);
     padding: 20px 32px;
   }
 
   .footer-note {
-    color: var(--cool-gray);
+    color: var(--dim);
     font-size: 12px;
     line-height: 1.6;
   }
@@ -490,9 +417,7 @@
     margin: 10mm;
   }
 
-  .print-header {
-    display: none;
-  }
+  .print-header { display: none; }
 
   @media print {
     body {
@@ -503,8 +428,7 @@
       print-color-adjust: exact;
     }
 
-    .export-btn, .copy-btn, .learn-btn, .reset-btn,
-    .preset-row, .preset-desc, .advanced-section { display: none !important; }
+    .btn, .reset-btn, .preset-row, .advanced-section { display: none !important; }
 
     .print-header {
       display: block;
@@ -513,16 +437,8 @@
       border-bottom: 1px solid #ccc;
     }
 
-    .print-header .print-meta {
-      font-size: 8px;
-      color: #666;
-    }
-
-    .print-header .print-inputs {
-      font-size: 9px;
-      color: #333;
-      margin-top: 2px;
-    }
+    .print-header .print-meta { font-size: 8px; color: #666; }
+    .print-header .print-inputs { font-size: 9px; color: #333; margin-top: 2px; }
 
     .header-row { margin-bottom: 8px; }
     h1 { color: #093B5F; font-size: 16px; }
@@ -553,46 +469,27 @@
       padding: 10px 8px;
     }
 
-    .icon-circle {
-      width: 18px;
-      height: 18px;
-      background: #00855f;
-      margin-bottom: 4px;
-    }
-
+    .icon-circle { width: 18px; height: 18px; background: #00855f; margin-bottom: 4px; }
     .icon-circle svg { width: 10px; height: 10px; }
     .stat { color: #00855f; font-size: 16px; margin-bottom: 1px; }
     .stat-label { font-size: 7px; margin-bottom: 4px; color: #555; }
     .dollar { color: #00855f; font-size: 9px; margin-bottom: 2px; }
     .formula { font-size: 7px; margin-bottom: 4px; }
-    .benefit { color: #0077a3; font-size: 7px; margin-bottom: 4px; line-height: 1.3; }
+    .benefit { font-size: 7px; margin-bottom: 4px; line-height: 1.3; }
     .headline { color: #1a1a1a; font-size: 8px; margin-bottom: 4px; }
 
-    .contrast {
-      font-size: 7px;
-      border-top-color: #ddd;
-      padding-top: 4px;
-      line-height: 1.3;
-    }
-
+    .contrast { font-size: 7px; border-top-color: #ddd; padding-top: 4px; line-height: 1.3; }
     .contrast .today-label { color: #00855f; }
     .contrast .today-text { color: #555; }
     .contrast .sam-label { color: #00855f; }
     .contrast .sam-text { color: #1a1a1a; }
 
-    .footer-band {
-      background: #f5f7f9;
-      border-color: #ccc;
-      padding: 6px 12px;
-    }
-
+    .footer-band { background: #f5f7f9; border-color: #ccc; padding: 6px 12px; }
     .footer-note { color: #444; font-size: 7px; }
   }
 
   /* Responsive */
-  @media (max-width: 1400px) {
-    .input-grid { grid-template-columns: repeat(4, 1fr); }
-  }
+  @media (max-width: 1400px) { .input-grid { grid-template-columns: repeat(4, 1fr); } }
 
   @media (max-width: 1100px) {
     body { padding: 36px 32px; }
@@ -629,9 +526,9 @@
 
   <div class="header-row">
     <h1>Solace Agent Mesh / ROI Calculator</h1>
-    <button class="export-btn" onclick="window.print()">Export as PDF</button>
-    <button class="copy-btn" onclick="copySummary()">Copy Summary</button>
-    <a class="learn-btn" href="https://solace.com/agent-mesh-demo/" target="_blank" rel="noopener">Learn more</a>
+    <button class="btn btn-primary" onclick="window.print()">Export as PDF</button>
+    <button class="btn btn-secondary" onclick="copySummary()">Copy Summary</button>
+    <a class="btn btn-secondary" href="https://solace.com/agent-mesh-demo/" target="_blank" rel="noopener">Learn more</a>
     <button class="reset-btn" onclick="resetAll()">Reset</button>
   </div>
 
@@ -642,7 +539,6 @@
       <button class="preset-pill active" data-preset="base" onclick="applyPreset('base')">Base</button>
       <button class="preset-pill" data-preset="aggressive" onclick="applyPreset('aggressive')">Aggressive</button>
     </div>
-    <span class="preset-desc" id="presetDesc">Base: field-validated assumptions from early enterprise adopters. Start here.</span>
   </div>
 
   <div class="input-panel">
@@ -662,16 +558,7 @@
       </div>
       <div class="input-field">
         <div class="input-label">Engineer Monthly Cost (USD)</div>
-        <div class="input-with-region">
-          <input type="number" id="engineerCost" value="20000" min="0" inputmode="numeric">
-          <select class="region-select" id="regionSelect" onchange="applyRegion()">
-            <option value="">--</option>
-            <option value="22000">US</option>
-            <option value="20000" selected>EMEA</option>
-            <option value="6000">India</option>
-            <option value="8000">LATAM</option>
-          </select>
-        </div>
+        <input type="number" id="engineerCost" value="20000" min="0" inputmode="numeric">
         <div class="helper">Fully-loaded cost</div>
       </div>
       <div class="input-field">
@@ -864,6 +751,8 @@
     aggressive:   { effort: 55, token: 28, outage: 400000, juris: 150000, pilotMonths: 6, pilotTeam: 4, timeToday: 16, timeSam: 4, timeTeam: 4 }
   };
 
+  var currentPreset = 'base';
+
   var STACK_TEXT = {
     langchain: { today0: '16 weeks to production with LangGraph. Fast to demo, longer to harden for enterprise.', today1: 'LangGraph agents share code but not runtime state. Reuse requires custom integration work.', today2: 'LangSmith charges per trace/run. Costs scale with invocation volume, not just agent count.', today3: 'Agents call Salesforce, BambooHR directly. No platform-level governor.', today4: 'LangSmith evals cover single agents. Multi-agent production gaps surface late.', today5: 'Separate stacks per region. IAM and routing managed outside the framework.' },
     openai: { today0: '16 weeks to production with OpenAI Agents SDK.', today1: 'Each agent is a standalone SDK call. No shared logic.', today2: 'Context stuffed into every assistant message via API.', today3: 'Agents hit APIs directly. No rate-limit layer.', today4: 'SDK demos look great. Production gaps surface late.', today5: 'Regional deployments duplicated per Azure region.' },
@@ -878,8 +767,6 @@
     currentAgents: 5, targetAgents: 25, tokenSpend: 50000,
     engineerCost: 20000, jurisdictions: 4, systems: 8, stack: 'langchain', preset: 'base'
   };
-
-  var currentPreset = 'base';
 
   function formatMoney(n) {
     if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
@@ -928,7 +815,6 @@
     var v = getInputs();
     var a = getAdvanced();
 
-    // Card 0: Time-to-First-Production-Agent
     var weeksSaved = Math.max(0, a.timeToday - a.timeSam);
     var card0Value = (weeksSaved / 4) * v.engineerCost * a.timeTeam;
     document.getElementById('stat0').textContent = weeksSaved + ' wks';
@@ -936,7 +822,6 @@
     document.getElementById('formula0').textContent =
       '(' + a.timeToday + ' - ' + a.timeSam + ') wks / 4 x $' + formatK(v.engineerCost) + ' x ' + a.timeTeam + ' eng = ' + formatMoney(card0Value);
 
-    // Card 1: Reusable Composable Agents
     var newAgents = Math.max(0, v.targetAgents - v.currentAgents);
     var effNew = effectiveAgents(newAgents);
     var effortPct = a.effort / 100;
@@ -946,7 +831,6 @@
     document.getElementById('formula1').textContent =
       Math.round(effNew) + ' new x 2 mo x $' + formatK(v.engineerCost) + ' x ' + a.effort + '% = ' + formatMoney(card1Value) + '/yr';
 
-    // Card 2: Lower Model Spend
     var tokenPct = a.token / 100;
     var card2Value = v.tokenSpend * 12 * tokenPct;
     document.getElementById('stat2').textContent = a.token + '%';
@@ -954,28 +838,24 @@
     document.getElementById('formula2').textContent =
       '$' + formatK(v.tokenSpend) + '/mo x 12 x ' + a.token + '% = ' + formatMoney(card2Value) + '/yr';
 
-    // Card 3: Protect Systems of Record
     var riskProb = 0.30;
     var card3Value = v.systems * a.outage * riskProb;
     document.getElementById('dollar3').textContent = formatMoney(card3Value) + '/yr risk avoidance';
     document.getElementById('formula3').textContent =
       v.systems + ' systems x $' + formatK(a.outage) + ' x 30% prob = ' + formatMoney(card3Value) + '/yr';
 
-    // Card 4: Avoided Sunk Pilot Cost
     var card4Value = a.pilotMonths * v.engineerCost * a.pilotTeam;
     document.getElementById('stat4').textContent = formatMoney(card4Value);
     document.getElementById('dollar4').textContent = formatMoney(card4Value) + ' one-time';
     document.getElementById('formula4').textContent =
       a.pilotMonths + ' mo x $' + formatK(v.engineerCost) + ' x ' + a.pilotTeam + ' eng = ' + formatMoney(card4Value);
 
-    // Card 5: Global Regulated Ops
     var extraJurisdictions = Math.max(0, v.jurisdictions - 1);
     var card5Value = extraJurisdictions * a.juris;
     document.getElementById('dollar5').textContent = formatMoney(card5Value) + ' one-time avoidance';
     document.getElementById('formula5').textContent =
       '(' + v.jurisdictions + ' - 1) jurisdictions x $' + formatK(a.juris) + ' = ' + formatMoney(card5Value);
 
-    // Totals
     var recurring = card1Value + card2Value;
     var oneTime = card0Value + card4Value + card5Value;
     var risk = card3Value;
@@ -986,15 +866,12 @@
     document.getElementById('totalOneTime').textContent = formatMoney(oneTime);
     document.getElementById('totalRisk').textContent = formatMoney(risk);
 
-    // Print header
     document.getElementById('printMeta').textContent =
-      'Generated ' + new Date().toLocaleDateString() + ' | Preset: ' + currentPreset.charAt(0).toUpperCase() + currentPreset.slice(1);
+      'Generated ' + new Date().toLocaleDateString();
     document.getElementById('printInputs').textContent =
       'Inputs: ' + v.currentAgents + ' agents today, ' + v.targetAgents + ' in 12 mo, $' + formatK(v.tokenSpend) + '/mo tokens, $' + formatK(v.engineerCost) + '/eng/mo, ' + v.jurisdictions + ' jurisdictions, ' + v.systems + ' systems';
 
-    // Stack text
     updateStackText(v.stack);
-
     updateURL();
   }
 
@@ -1008,12 +885,6 @@
     document.getElementById('today5').textContent = texts.today5;
   }
 
-  var PRESET_DESCS = {
-    conservative: 'Conservative: floor estimate. Minimal reuse, shorter pilots, smaller teams. Use if prospect is skeptical.',
-    base: 'Base: field-validated assumptions from early enterprise adopters. Start here.',
-    aggressive: 'Aggressive: full platform adoption. Larger teams, longer avoided pilots, higher outage costs. Use for upside framing.'
-  };
-
   function applyPreset(name) {
     currentPreset = name;
     var p = PRESETS[name];
@@ -1026,22 +897,10 @@
     document.getElementById('advTimeToday').value = p.timeToday;
     document.getElementById('advTimeSam').value = p.timeSam;
     document.getElementById('advTimeTeam').value = p.timeTeam;
-
     document.querySelectorAll('.preset-pill').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.preset === name);
     });
-
-    document.getElementById('presetDesc').textContent = PRESET_DESCS[name] || '';
-
     recalculate();
-  }
-
-  function applyRegion() {
-    var val = document.getElementById('regionSelect').value;
-    if (val) {
-      document.getElementById('engineerCost').value = val;
-      recalculate();
-    }
   }
 
   function toggleAdvanced() {
@@ -1059,13 +918,11 @@
     document.getElementById('jurisdictions').value = DEFAULTS.jurisdictions;
     document.getElementById('systems').value = DEFAULTS.systems;
     document.getElementById('stackSelect').value = DEFAULTS.stack;
-    document.getElementById('regionSelect').value = '20000';
     applyPreset('base');
   }
 
   function copySummary() {
     var v = getInputs();
-    var a = getAdvanced();
     var recurring = document.getElementById('totalRecurring').textContent;
     var oneTime = document.getElementById('totalOneTime').textContent;
     var risk = document.getElementById('totalRisk').textContent;
@@ -1073,14 +930,13 @@
 
     var text = 'Solace Agent Mesh ROI Estimate - generated ' + new Date().toLocaleDateString() + '\n' +
       'Inputs: ' + v.currentAgents + ' agents today -> ' + v.targetAgents + ' in 12 months, $' + formatK(v.tokenSpend) + '/mo tokens, $' + formatK(v.engineerCost) + '/eng/mo, ' + v.jurisdictions + ' jurisdictions, ' + v.systems + ' systems\n' +
-      'Preset: ' + currentPreset.charAt(0).toUpperCase() + currentPreset.slice(1) + '\n' +
       'Total value: ' + total + '\n' +
       '  Recurring: ' + recurring + '/yr | One-time: ' + oneTime + ' | Risk avoidance: ' + risk + '/yr\n' +
       'Assumptions: validate against actual run-rate and project plans.\n' +
       'https://solacese.github.io/sam-roi/';
 
     navigator.clipboard.writeText(text).then(function() {
-      var btn = document.querySelector('.copy-btn');
+      var btn = document.querySelector('.btn-secondary');
       var orig = btn.textContent;
       btn.textContent = 'Copied!';
       setTimeout(function() { btn.textContent = orig; }, 1500);
@@ -1116,18 +972,13 @@
     if (params.has('p')) applyPreset(params.get('p'));
   }
 
-  // Bind events
   ['currentAgents', 'targetAgents', 'tokenSpend', 'engineerCost', 'jurisdictions', 'systems'].forEach(function(id) {
     document.getElementById(id).addEventListener('input', recalculate);
   });
   document.getElementById('stackSelect').addEventListener('change', recalculate);
 
   ['advEffort', 'advToken', 'advOutage', 'advJuris', 'advPilotMonths', 'advPilotTeam', 'advTimeToday', 'advTimeSam', 'advTimeTeam'].forEach(function(id) {
-    document.getElementById(id).addEventListener('input', function() {
-      document.querySelectorAll('.preset-pill').forEach(function(btn) { btn.classList.remove('active'); });
-      currentPreset = 'custom';
-      recalculate();
-    });
+    document.getElementById(id).addEventListener('input', recalculate);
   });
 
   loadFromURL();

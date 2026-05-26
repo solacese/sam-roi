@@ -132,6 +132,12 @@
 
   .preset-pill:hover:not(.active) { color: var(--text); }
 
+  .preset-desc {
+    font-size: 12px;
+    color: var(--dim);
+    margin-left: 16px;
+  }
+
   /* Input panel */
   .input-panel {
     background: var(--panel);
@@ -539,6 +545,7 @@
       <button class="preset-pill active" data-preset="base" onclick="applyPreset('base')">Base</button>
       <button class="preset-pill" data-preset="aggressive" onclick="applyPreset('aggressive')">Aggressive</button>
     </div>
+    <span class="preset-desc" id="presetDesc">Base: field-validated assumptions from early enterprise adopters. Start here.</span>
   </div>
 
   <div class="input-panel">
@@ -885,6 +892,12 @@
     document.getElementById('today5').textContent = texts.today5;
   }
 
+  var PRESET_DESCS = {
+    conservative: 'Conservative: floor estimate. Minimal reuse, shorter pilots, smaller teams.',
+    base: 'Base: field-validated assumptions from early enterprise adopters. Start here.',
+    aggressive: 'Aggressive: full platform adoption. Larger teams, longer avoided pilots, higher outage costs.'
+  };
+
   function applyPreset(name) {
     currentPreset = name;
     var p = PRESETS[name];
@@ -900,6 +913,7 @@
     document.querySelectorAll('.preset-pill').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.preset === name);
     });
+    document.getElementById('presetDesc').textContent = PRESET_DESCS[name] || '';
     recalculate();
   }
 
